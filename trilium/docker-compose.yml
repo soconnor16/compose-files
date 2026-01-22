@@ -1,0 +1,10 @@
+services:
+  trilium:
+    image: triliumnext/trilium:latest
+    restart: unless-stopped
+    ports:
+      - '8002:8080'
+    volumes:
+      - /srv/services/trilium/trilium_data:/home/node/trilium-data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
