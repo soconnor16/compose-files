@@ -12,14 +12,12 @@ services:
     ports:
       - "8004:8000"
     volumes:
-      - data:/usr/src/paperless/data
-      - media:/usr/src/paperless/media
-      - /srv/services/paperless-ngx/export:/usr/src/paperless/export
-      - /srv/services/paperless-ngx/consume:/usr/src/paperless/consume
+      - /home/srv/services/paperless-ngx/data:/usr/src/paperless/data
+      - /home/srv/services/paperless-ngx/media:/usr/src/paperless/media
+      - /home/srv/services/paperless-ngx/export:/usr/src/paperless/export
+      - /home/srv/services/paperless-ngx/consume:/usr/src/paperless/consume
     environment:
       PAPERLESS_REDIS: redis://broker:6379
 volumes:
-  data:
-  media:
   redisdata:
 
