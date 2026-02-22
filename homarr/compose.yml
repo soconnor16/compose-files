@@ -1,0 +1,14 @@
+services:
+  homarr:
+    image: ghcr.io/ajnart/homarr:latest
+    restart: unless-stopped
+    volumes:
+      - /srv/services/homarr/configs:/app/data/configs
+      - /srv/services/homarr/icons:/app/public/icons
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - services
+
+networks:
+  services:
+    external: true
