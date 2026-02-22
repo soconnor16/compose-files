@@ -5,6 +5,7 @@ services:
     volumes:
       - /srv/services/aria2/config:/config
       - /srv/services/paperless-ngx/consume:/downloads/consume
+      - /srv/services/kiwix/data:/downloads/kiwix
       - /home/stephen/Downloads:/downloads
     env_file: ./.env
     networks:
