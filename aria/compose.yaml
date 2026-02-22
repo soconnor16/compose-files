@@ -1,0 +1,23 @@
+services:
+  aria2:
+    image: p3terx/aria2-pro:latest
+    restart: unless-stopped
+    volumes:
+      - /srv/services/aria2/config:/config
+      - /srv/services/aria2/downloads:/downloads
+    env_file: ./.env
+    networks:
+      - default
+      - services
+
+  ariang:
+    image: p3terx/ariang:latest
+    restart: unless-stopped
+    networks:
+      - default
+      - services
+
+networks:RP
+  default:
+  services:
+    external: true
