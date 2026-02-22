@@ -3,7 +3,7 @@ services:
     image: filebrowser/filebrowser:latest
     restart: unless-stopped
     volumes:
-      - /srv:/srv
+      - /srv/services/filebrowser/data:/srv
       - /srv/services/filebrowser/database.db:/database.db
     networks:
       - services
