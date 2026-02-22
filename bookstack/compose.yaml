@@ -1,0 +1,27 @@
+services:
+  bookstack-db:
+    image: lscr.io/linuxserver/mariadb:latest
+    restart: unless-stopped
+    volumes:
+      - /srv/services/bookstack/db:/config
+    env_file: ./.env
+
+    networks:
+      - default
+
+  bookstack:
+    image: lscr.io/linuxserver/bookstack:latest
+    restart: unless-stopped
+    depends_on:
+      - bookstack-db
+    volumes:
+      - /srv/services/bookstack/data:/config
+    env_file: ./.env
+    networks:
+      - default
+      - services
+
+networks:
+  default:
+  services:
+    external: true
