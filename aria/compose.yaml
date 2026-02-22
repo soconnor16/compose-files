@@ -4,7 +4,7 @@ services:
     restart: unless-stopped
     volumes:
       - /srv/services/aria2/config:/config
-      - /srv/services/aria2/downloads:/home/stephen/Downloads
+      - /home/stephen/Downloads:/downloads
     env_file: ./.env
     networks:
       - default
