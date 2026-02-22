@@ -4,8 +4,8 @@ services:
     restart: unless-stopped
     volumes:
       - /srv/services/aria2/config:/config
-      - /srv/services/paperless-ngx/consume:/downloads/consume
-      - /srv/services/kiwix/data:/downloads/kiwix
+      - /srv/services/paperless-ngx/consume:/paperless-ngx-consume
+      - /srv/services/kiwix/data:kiwix-data
       - /home/stephen/Downloads:/downloads
     env_file: ./.env
     networks:
