@@ -1,0 +1,13 @@
+services:
+  filebrowser:
+    image: filebrowser/filebrowser:latest
+    restart: unless-stopped
+    volumes:
+      - /srv:/srv
+      - /srv/services/filebrowser/database.db:/database.db
+    networks:
+      - services
+
+networks:
+  services:
+    external: true
