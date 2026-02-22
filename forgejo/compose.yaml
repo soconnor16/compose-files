@@ -1,21 +1,17 @@
-networks:
-  forgejo:
-    external: false
-
 services:
-  server:
-    image: codeberg.org/forgejo/forgejo:13
-    container_name: forgejo
-    environment:
-      - USER_UID=1000
-      - USER_GID=1000
-    restart: always
-    networks:
-      - forgejo
+  forgejo:
+    image: codeberg.org/forgejo/forgejo:latest
+    restart: unless-stopped
     volumes:
-      - /home/srv/services/forgejo/data:/data
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
-    ports:
-      - '222:22'
-      - '8001:3000'
+      - /srv/services/forgejo/data:/data
+    environment:
+      USER_UID: 1000
+      USER_GID: 1000
+    networks:
+      - default
+      - services
+
+networks:
+  default:
+  services:
+    external: true
