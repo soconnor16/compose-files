@@ -1,23 +1,36 @@
 services:
-  broker:
+  paperless-broker:
     image: docker.io/library/redis:8
     restart: unless-stopped
     volumes:
-      - redisdata:/data
-  webserver:
+      - /srv/services/paperless-ngx/redis:/data
+    networks:
+      - default
+
+  paperless:
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
     restart: unless-stopped
     depends_on:
-      - broker
-    ports:
-      - "8004:8000"
+      - paperless-broker
     volumes:
-      - /home/srv/services/paperless-ngx/data:/usr/src/paperless/data
-      - /home/srv/services/paperless-ngx/media:/usr/src/paperless/media
-      - /home/srv/services/paperless-ngx/export:/usr/src/paperless/export
-      - /home/srv/services/paperless-ngx/consume:/usr/src/paperless/consume
+      - /srv/services/paperless-ngx/data:/usr/src/paperless/data
+      - /srv/services/paperless-ngx/media:/usr/src/paperless/media
+      - /srv/services/paperless-ngx/export:/usr/src/paperless/export
+      - /srv/services/paperless-ngx/consume:/usr/src/paperless/consume
     environment:
-      PAPERLESS_REDIS: redis://broker:6379
-volumes:
-  redisdata:
+      PAPERLESS_REDIS: redis://paperless-broker:6379
+      PAPERLESS_TASK_WORKERS: 4
+      PAPERLESS_THREADS_PER_WORKER: 2
+      PAPERLESS_WEBSERVER_WORKERS: 2
+      PAPERLESS_OCR_OUTPUT_TYPE: pdfa
+      PAPERLESS_OCR_COLOR_CONVERSION_STRATEGY: RGB
+      PAPERLESS_OCR_LANGUAGE: eng
+      PAPERLESS_OCR_SKIP_ARCHIVE_FILE: always
+    networks:
+      - default
+      - services
 
+networks:
+  default:
+  services:
+    external: true
