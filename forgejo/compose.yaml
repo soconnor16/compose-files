@@ -1,6 +1,6 @@
 services:
   forgejo:
-    image: codeberg.org/forgejo/forgejo:latest
+    image: codeberg.org/forgejo/forgejo:13
     restart: unless-stopped
     volumes:
       - /srv/services/forgejo/data:/data
