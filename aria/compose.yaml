@@ -4,6 +4,7 @@ services:
     restart: unless-stopped
     volumes:
       - /srv/services/aria2/config:/config
+      - /srv/services/paperless-ngx/consume:/downloads/consume
       - /home/stephen/Downloads:/downloads
     env_file: ./.env
     networks:
