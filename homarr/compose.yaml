@@ -1,6 +1,6 @@
 services:
   homarr:
-    image: ghcr.io/ajnart/homarr:latest
+    image: ghcr.io/homarr-labs/homarr:latest
     restart: unless-stopped
     volumes:
       - /srv/services/homarr/configs:/app/data/configs
