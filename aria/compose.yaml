@@ -1,25 +1,24 @@
 services:
   aria2:
+    container_name: aria2
     image: p3terx/aria2-pro:latest
     restart: unless-stopped
     volumes:
-      - /srv/services/aria2/config:/config
-      - /srv/services/paperless-ngx/consume:/paperless-ngx-consume
-      - /srv/services/kiwix/data:/kiwix-data
+      - /services/aria2/config:/config
+      - /services/paperless-ngx/consume:/paperless
+      - /services/kiwix/data:/kiwix
       - /home/stephen/Downloads:/downloads
     env_file: ./.env
     networks:
-      - default
       - services
 
   ariang:
+    container_name: ariang
     image: p3terx/ariang:latest
     restart: unless-stopped
     networks:
-      - default
       - services
 
 networks:
-  default:
   services:
     external: true

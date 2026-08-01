@@ -1,14 +1,15 @@
 services:
   homarr:
+    container_name: homarr
     image: ghcr.io/homarr-labs/homarr:latest
     restart: unless-stopped
     volumes:
-      - /srv/services/homarr/configs:/app/data/configs
-      - /srv/services/homarr/icons:/app/public/icons
+      - /services/homarr/configs:/app/data/configs
+      - /services/homarr/icons:/app/public/icons
       - /var/run/docker.sock:/var/run/docker.sock
+    env_file: ./.env
     networks:
       - services
-    env_file: ./.env
 
 networks:
   services:

@@ -1,5 +1,6 @@
 services:
   paperless-broker:
+    container_name: paperless-broker
     image: docker.io/library/redis:8
     restart: unless-stopped
     volumes:
@@ -8,14 +9,13 @@ services:
       - default
 
   paperless:
+    container_name: paperless
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
     restart: unless-stopped
     depends_on:
       - paperless-broker
     env_file:
       - .env
-    ports:
-      - 127.0.0.1:8000:8000
     volumes:
       - /services/paperless-ngx/data:/usr/src/paperless/data
       - /services/paperless-ngx/media:/usr/src/paperless/media
@@ -35,6 +35,9 @@ services:
       PAPERLESS_FILENAME_FORMAT: "{{ title }}"
     networks:
       - default
+      - services
 
 networks:
   default:
+  services:
+    external: true
