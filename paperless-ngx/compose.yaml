@@ -12,6 +12,8 @@ services:
     restart: unless-stopped
     depends_on:
       - paperless-broker
+    env_file:
+      - .env
     volumes:
       - /srv/services/paperless-ngx/data:/usr/src/paperless/data
       - /srv/services/paperless-ngx/media:/usr/src/paperless/media
