@@ -7,7 +7,7 @@ services:
       - /services/homarr/configs:/app/data/configs
       - /services/homarr/icons:/app/public/icons
       - /var/run/docker.sock:/var/run/docker.sock
-    env_file: ./.env
+    env_file: .env
     networks:
       - services
 
