@@ -1,0 +1,20 @@
+networks:
+  services:
+    external: true
+
+services:
+  server:
+    image: codeberg.org/forgejo/forgejo:16
+    container_name: forgejo
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - FORGEJO__server__ROOT_URL=https://forgejo.home/
+    restart: always
+    networks:
+      - services
+    volumes:
+      - /services/forgejo/data:/data
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - '222:22'
